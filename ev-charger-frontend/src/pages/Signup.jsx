@@ -20,6 +20,8 @@ const Signup = () => {
             await axios.post(fullUrl, { name, email, password, role });
             navigate('/login');
         } catch (err) {
+            console.log(err.response.data);
+            console.log(err);
             setError('Registration failed. Try again.');
         }
     };
