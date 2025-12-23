@@ -52,7 +52,7 @@ services:
       context: ./ev-charger-frontend
       dockerfile: Dockerfile
     environment:
-      BACKEND_URL: ${BACKEND_URL:-https://ev-charger-finder.up.railway.app}
+      BACKEND_URL: ${BACKEND_URL:-http://backend:8081}
     container_name: evfinder-frontend
     restart: unless-stopped
     ports:
