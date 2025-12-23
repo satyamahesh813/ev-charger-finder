@@ -47,7 +47,7 @@ const AdminDashboard = ({ user, logout }) => {
 
     const fetchStats = async () => {
         try {
-            const fullUrl = `${import.meta.env.VITE_API_URL}/admin/stats`;
+            const fullUrl = `${import.meta.env.VITE_API_URL}/api/admin/stats`;
             console.log('🚀 Fetching stats from:', fullUrl); // DEBUG
             const res = await axios.get(fullUrl, axiosConfig);
             setStats(res.data);
