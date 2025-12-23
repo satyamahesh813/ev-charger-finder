@@ -13,7 +13,9 @@ const Signup = () => {
     const handleSignup = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('/api/auth/signup', { name, email, password, role });
+            const fullUrl = `${import.meta.env.VITE_API_URL}/api/auth/signup`;
+            onsole.log('🚀 Fetching stats from:', fullUrl); // DEBUG
+            await axios.post(fullUrl, { name, email, password, role });
             navigate('/login');
         } catch (err) {
             setError('Registration failed. Try again.');

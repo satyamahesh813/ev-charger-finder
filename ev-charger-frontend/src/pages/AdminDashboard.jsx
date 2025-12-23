@@ -47,7 +47,9 @@ const AdminDashboard = ({ user, logout }) => {
 
     const fetchStats = async () => {
         try {
-            const res = await axios.get('/api/admin/stats', axiosConfig);
+            const fullUrl = `${import.meta.env.VITE_API_URL}/admin/stats`;
+            console.log('🚀 Fetching stats from:', fullUrl); // DEBUG
+            const res = await axios.get(fullUrl, axiosConfig);
             setStats(res.data);
         } catch (err) {
             console.error('Error fetching stats', err);
@@ -57,7 +59,8 @@ const AdminDashboard = ({ user, logout }) => {
     const fetchUsers = async (search = '') => {
         setLoading(true);
         try {
-            const res = await axios.get(`/api/admin/users?search=${search}`, axiosConfig);
+            const fullUrl = `${import.meta.env.VITE_API_URL}/api/admin/users?search=${search}`;
+            const res = await axios.get(fullUrl, axiosConfig);
             setUsers(res.data);
         } catch (err) {
             alert('Failed to load user database. Please check your connection or login again.');
