@@ -49,7 +49,7 @@ const AdminDashboard = ({ user, logout }) => {
         try {
             const fullUrl = `${import.meta.env.VITE_API_URL}/admin/stats`;
             console.log('🚀 Fetching stats from:', fullUrl); // DEBUG
-            const res = await axios.get(fullUrl, axiosConfig);
+            const res = await axios.get('https://ev-charger-finder.up.railway.app/api/admin/stats', axiosConfig);
             setStats(res.data);
         } catch (err) {
             console.error('Error fetching stats', err);
