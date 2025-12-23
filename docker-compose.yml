@@ -32,7 +32,8 @@ services:
       DB_PASSWORD: ${DB_PASSWORD}
       API_NINJAS_KEY: ${API_NINJAS_KEY}
       JWT_SECRET: ${JWT_SECRET}
-      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost}
+      # Include Railway frontend origin for CORS in cloud, and localhost for local
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost,https://hearty-joy-production-1871.up.railway.app}
       SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-dev}
     ports:
       - "8081:8081"
@@ -51,10 +52,11 @@ services:
     build:
       context: ./ev-charger-frontend
       dockerfile: Dockerfile
-    environment:
-      BACKEND_URL: ${BACKEND_URL:-http://backend:8081}
     container_name: evfinder-frontend
     restart: unless-stopped
+    environment:
+      # Local default targets the Docker service name
+      BACKEND_URL: ${BACKEND_URL:-http://backend:8081}
     ports:
       - "80:80"
     depends_on:
