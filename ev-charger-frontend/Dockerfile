@@ -6,6 +6,7 @@ COPY . .
 RUN npm run build
 
 FROM nginx:alpine
+RUN apk add --no-cache gettext
 # Serve built SPA
 COPY --from=build /app/dist /usr/share/nginx/html
 # Put your nginx template where we'll envsubst it from
