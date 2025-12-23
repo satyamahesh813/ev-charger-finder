@@ -1,0 +1,31 @@
+# Environment files
+.env
+.env.local
+.env.production
+
+# Backend
+ev-charger-backend/target/
+ev-charger-backend/.mvn/
+ev-charger-backend/mvnw
+ev-charger-backend/mvnw.cmd
+ev-charger-backend/logs/
+
+# Frontend
+ev-charger-frontend/node_modules/
+ev-charger-frontend/dist/
+ev-charger-frontend/.vite/
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
