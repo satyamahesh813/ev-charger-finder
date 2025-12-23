@@ -42,7 +42,7 @@ services:
     networks:
       - evfinder-network
     healthcheck:
-      test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "https://ev-charger-finder.up.railway.app/api/chargers/stats" ]
+      test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8081/api/chargers/stats" ]
       interval: 30s
       timeout: 10s
       retries: 3
