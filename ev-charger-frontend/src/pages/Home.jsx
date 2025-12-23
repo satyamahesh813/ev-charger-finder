@@ -141,7 +141,8 @@ const Home = ({ user, logout }) => {
                         lng: mapCenter[1]
                     }
                 };
-                const response = await axios.get('/api/chargers', config);
+                const fullUrl = `${import.meta.env.VITE_API_URL}/api/chargers`;
+                const response = await axios.get(fullUrl, config);
                 setChargers(response.data);
             } catch (error) {
                 console.error("Error fetching chargers", error);

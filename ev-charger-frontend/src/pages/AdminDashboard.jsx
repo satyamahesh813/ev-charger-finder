@@ -49,7 +49,7 @@ const AdminDashboard = ({ user, logout }) => {
         try {
             const fullUrl = `${import.meta.env.VITE_API_URL}/admin/stats`;
             console.log('🚀 Fetching stats from:', fullUrl); // DEBUG
-            const res = await axios.get('https://ev-charger-finder.up.railway.app/api/admin/stats', axiosConfig);
+            const res = await axios.get(fullUrl, axiosConfig);
             setStats(res.data);
         } catch (err) {
             console.error('Error fetching stats', err);
@@ -72,7 +72,8 @@ const AdminDashboard = ({ user, logout }) => {
     const fetchChargers = async (search = '') => {
         setLoading(true);
         try {
-            const res = await axios.get(`/api/admin/chargers?search=${search}`, axiosConfig);
+            const fullUrl = `${import.meta.env.VITE_API_URL}/api/admin/chargers?search=${search}`;
+            const res = await axios.get(fullUrl, axiosConfig);
             setChargers(res.data);
         } catch (err) {
             alert('Failed to load charging network. Please try again later.');
@@ -84,7 +85,8 @@ const AdminDashboard = ({ user, logout }) => {
     const fetchLogs = async () => {
         setLoading(true);
         try {
-            const res = await axios.get('/api/admin/logs', axiosConfig);
+            const fullUrl = `${import.meta.env.VITE_API_URL}/api/admin/logs`;
+            const res = await axios.get(fullUrl, axiosConfig);
             setLogs(res.data);
         } catch (err) {
             console.error('Error fetching logs', err);
@@ -95,7 +97,8 @@ const AdminDashboard = ({ user, logout }) => {
 
     const handleToggleUser = async (id) => {
         try {
-            await axios.patch(`/api/admin/users/${id}/toggle`, {}, axiosConfig);
+            const fullUrl = `${import.meta.env.VITE_API_URL}/api/admin/users/${id}/toggle`;
+            await axios.patch(fullUrl, {}, axiosConfig);
             fetchUsers();
             fetchStats();
         } catch (err) {
@@ -106,7 +109,8 @@ const AdminDashboard = ({ user, logout }) => {
 
     const handleToggleCharger = async (id) => {
         try {
-            await axios.patch(`/api/admin/chargers/${id}/toggle`, {}, axiosConfig);
+            const fullUrl = `${import.meta.env.VITE_API_URL}/api/admin/chargers/${id}/toggle`;
+            await axios.patch(fullUrl, {}, axiosConfig);
             fetchChargers();
             fetchStats();
         } catch (err) {
@@ -118,7 +122,8 @@ const AdminDashboard = ({ user, logout }) => {
     const handleDeleteUser = async (id) => {
         if (!window.confirm('Are you sure you want to delete this user? This action cannot be undone.')) return;
         try {
-            await axios.delete(`/api/admin/users/${id}`, axiosConfig);
+            const fullUrl = `${import.meta.env.VITE_API_URL}/api/admin/users/${id}`;
+            await axios.delete(fullUrl, axiosConfig);
             fetchUsers();
             fetchStats();
         } catch (err) {
@@ -130,7 +135,8 @@ const AdminDashboard = ({ user, logout }) => {
     const handleDeleteCharger = async (id) => {
         if (!window.confirm('Are you sure you want to delete this charger?')) return;
         try {
-            await axios.delete(`/api/admin/chargers/${id}`, axiosConfig);
+            const fullUrl = `${import.meta.env.VITE_API_URL}/api/admin/chargers/${id}`;
+            await axios.delete(fullUrl, axiosConfig);
             fetchChargers();
             fetchStats();
         } catch (err) {
@@ -146,9 +152,11 @@ const AdminDashboard = ({ user, logout }) => {
 
         try {
             if (modalConfig.data) {
-                await axios.put(`/api/admin/users/${modalConfig.data.id}`, userData, axiosConfig);
+                const fullUrl = `${import.meta.env.VITE_API_URL}/api/admin/users/${modalConfig.data.id}`;
+                await axios.put(fullUrl, userData, axiosConfig);
             } else {
-                await axios.post('/api/admin/users', userData, axiosConfig);
+                const fullUrl = `${import.meta.env.VITE_API_URL}/api/admin/users`;
+                await axios.post(fullUrl, userData, axiosConfig);
             }
             fetchUsers();
             fetchStats();
@@ -171,9 +179,13 @@ const AdminDashboard = ({ user, logout }) => {
 
         try {
             if (modalConfig.data) {
-                await axios.put(`/api/admin/chargers/${modalConfig.data.id}`, chargerData, axiosConfig);
+                const fullUrl = `${import.meta.env.VITE_API_URL}/api/admin/chargers/${modalConfig.data.id}`;
+                console.log('🚀 Full URL:', fullUrl); // DEBUG
+                await axios.put(fullUrl, chargerData, axiosConfig);
             } else {
-                await axios.post('/api/admin/chargers', chargerData, axiosConfig);
+                const fullUrl = `${import.meta.env.VITE_API_URL}/api/admin/chargers`;
+                console.log('🚀 Full URL:', fullUrl); // DEBUG
+                await axios.post(fullUrl, chargerData, axiosConfig);
             }
             fetchChargers();
             fetchStats();
@@ -187,7 +199,9 @@ const AdminDashboard = ({ user, logout }) => {
     const handleBulkToggle = async (type, enabled) => {
         if (selectedIds.length === 0) return;
         try {
-            await axios.patch(`/api/admin/${type}s/bulk-toggle`, { ids: selectedIds, enabled }, axiosConfig);
+            const fullUrl = `${import.meta.env.VITE_API_URL}/api/admin/${type}s/bulk-toggle`;
+            console.log('🚀 Full URL:', fullUrl); // DEBUG
+            await axios.patch(fullUrl, { ids: selectedIds, enabled }, axiosConfig);
             if (type === 'user') fetchUsers(searchTerm); else fetchChargers(searchTerm);
             fetchStats();
             setSelectedIds([]);
