@@ -10,7 +10,9 @@ const Landing = ({ user }) => {
     useEffect(() => {
         const fetchStats = async () => {
             try {
-                const response = await axios.get('/api/chargers/stats');
+                const fullUrl = `${import.meta.env.VITE_API_URL}/api/chargers/stats`;
+                console.log('🚀 Fetching stats from:', fullUrl);
+                const response = await axios.get(fullUrl);
                 setStats(response.data);
             } catch (error) {
                 console.error("Error fetching stats:", error);
