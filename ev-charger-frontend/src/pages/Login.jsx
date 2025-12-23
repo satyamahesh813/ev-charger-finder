@@ -12,7 +12,7 @@ const Login = ({ setUser }) => {
         e.preventDefault();
         try {
             const fullUrl = `${import.meta.env.VITE_API_URL}/api/auth/login`;
-            onsole.log('🚀 Fetching stats from:', fullUrl); // DEBUG
+            console.log('🚀 Fetching stats from:', fullUrl); // DEBUG
             const response = await axios.post(fullUrl, { email, password });
             localStorage.setItem('user', JSON.stringify(response.data));
             setUser(response.data);
