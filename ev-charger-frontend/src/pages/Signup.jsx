@@ -12,7 +12,9 @@ const Signup = () => {
 
     const handleSignup = async (e) => {
         e.preventDefault();
+        console.log('🚀 Fetching stats from:', `${import.meta.env.VITE_API_URL}/api/auth/signup`);
         try {
+            console.log("SIGNUP CLICKED");
             const fullUrl = `${import.meta.env.VITE_API_URL}/api/auth/signup`;
             onsole.log('🚀 Fetching stats from:', fullUrl); // DEBUG
             await axios.post(fullUrl, { name, email, password, role });
