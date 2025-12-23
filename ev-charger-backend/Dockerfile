@@ -8,5 +8,5 @@ RUN mvn clean package -DskipTests
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 COPY --from=build /app/target/backend.jar app.jar
-EXPOSE ${PORT:8080}
+EXPOSE $PORT
 ENTRYPOINT ["java", "-jar", "app.jar"]
