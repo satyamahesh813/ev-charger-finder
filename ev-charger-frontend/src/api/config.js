@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // API base URL - defaults to backend on port 8081
 // In Docker, use the host machine's IP or configure via environment
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8081';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://ev-charger-finder.up.railway.app/api' || 'http://localhost:8081';
 
 // Create axios instance with base configuration
 const api = axios.create({
