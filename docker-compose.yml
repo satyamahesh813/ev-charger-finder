@@ -42,7 +42,7 @@ services:
     networks:
       - evfinder-network
     healthcheck:
-      test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8081/api/chargers/stats" ]
+      test: [ "CMD", "wget", "--quiet", "--tries=1", "--spider", "https://ev-charger-finder.up.railway.app/api/chargers/stats" ]
       interval: 30s
       timeout: 10s
       retries: 3
@@ -52,7 +52,7 @@ services:
       context: ./ev-charger-frontend
       dockerfile: Dockerfile
     environment:
-      BACKEND_URL: ${BACKEND_URL:-http://backend:8081}
+      BACKEND_URL: ${BACKEND_URL:-https://ev-charger-finder.up.railway.app}
     container_name: evfinder-frontend
     restart: unless-stopped
     ports:
