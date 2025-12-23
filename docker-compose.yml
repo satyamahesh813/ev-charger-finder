@@ -51,6 +51,8 @@ services:
     build:
       context: ./ev-charger-frontend
       dockerfile: Dockerfile
+    environment:
+      - BACKEND_URL=http://backend:8081
     container_name: evfinder-frontend
     restart: unless-stopped
     ports:
