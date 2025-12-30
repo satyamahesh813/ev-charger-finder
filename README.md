@@ -194,7 +194,7 @@ ev-charger-finder/
 **Geolocation not working:**
 - Ensure HTTPS is enabled (required by browsers)
 - Check browser location permissions
-- Try the manual search feature
+- Try the manual search features
 
 ## License
 
